@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
+    <title>Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -35,13 +35,13 @@
 
             <nav class="nav-menu">
                 <ul class="nav-list" id="nav-list">
-                    <li class="nav-item">
-                        <span class="indicator"></span>
-                        <a href="../blog/">Blog</a>
-                    </li>
                     <li class="nav-item active">
                         <span class="indicator"></span>
-                        <a href="./">Projects</a>
+                        <a href="./">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="indicator"></span>
+                        <a href="../projects/">Projects</a>
                     </li>
 
                 </ul>
@@ -49,31 +49,19 @@
         </aside>
 
         <!-- RIGHT CONTENT FEED -->
-        <main class="content-feed">
-            <a href="sevastopol/" class="post-card">
-                <h2 class="post-title">Sevastopol Terminal</h2>
-                <div class="post-date">14.02.26</div>
+        <main class="content-feed" id="content-feed">
+            <a href="../blogs/blogpost1/" class="post-card">
+                <h2 class="post-title">Thirty Days With My Home Server</h2>
+                <div class="post-date">11.02.26</div>
 
                 <div class="post-preview-images">
-                    <img src="sevastopol/images/sevastopolreal.webp" alt="Sevastopol Interface">
-                    <img src="sevastopol/images/loading.png" alt="Loading Screen">
-                    <img src="sevastopol/images/aboutme.png" alt="About Me Command">
+                    <img src="../blogs/blogpost1/images/homarr.jpeg" alt="Homarr Dashboard">
+                    <img src="../blogs/blogpost1/images/server.jpeg" alt="Server Setup">
+                    <img src="../blogs/blogpost1/images/proxmox.jpeg" alt="Proxmox Interface">
                 </div>
 
-                <p class="post-excerpt">A retro-style terminal interface built as my portfolio website. Inspired by
-                    the game Alien: Isolation.</p>
-            </a>
-
-            <a href="horseinventory/" class="post-card">
-                <h2 class="post-title">HorseInventory 1.21</h2>
-                <div class="post-date">26.09.24</div>
-
-                <div class="post-preview-images">
-                    <img src="horseinventory/images/inventory.png" alt="Horse Inventory GUI">
-                    <img src="horseinventory/images/horse.webp" alt="Tamed Horse with Saddle">
-                </div>
-                <p class="post-excerpt">A plugin for 1.21 Minecraft written in Java. Adds a simple GUI for a horse
-                    inventory. Horse needs to be tamed and wearing a saddle for it to work.</p>
+                <p class="post-excerpt">How a used Dell Optiplex 3080 off Facebook Marketplace became my home server
+                    and my new toy.</p>
             </a>
         </main>
     </div>
