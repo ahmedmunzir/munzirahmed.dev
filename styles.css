@@ -551,3 +551,16 @@ codeinline {
     display: inline-block;
     /* Behave like text but respect padding/margins */
 }
+
+/* Utility Classes */
+.text-link {
+    color: #4da6ff;
+    /* Legible blue for dark mode */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.text-link:hover {
+    color: #80c4ff;
+    text-decoration: underline;
+}
