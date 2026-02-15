@@ -287,8 +287,8 @@ body {
         height: auto;
         min-height: 0;
         /* Ensure no min-height forcing */
-        padding: 16px 20px 10px 20px;
-        /* Reduced top padding to 16px */
+        padding: 6px 20px 10px 20px;
+        /* Reduced top padding substantially to 6px */
         border-bottom: 1px solid #333;
         /* Optional separation on mobile */
         margin-bottom: 20px;
@@ -331,8 +331,8 @@ body {
     .social-icons {
         justify-content: center;
         width: 100%;
-        margin-bottom: 18px;
-        /* 18px margin to nav */
+        margin-bottom: 8px;
+        /* Reduced to 8px to pull nav up */
     }
 
     .content-feed {
