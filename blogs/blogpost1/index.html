@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Minimalist Web Design | Munzir Ahmed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="../../images/profile.png" alt="Munzir Ahmed" class="profile-img">
+                <h1 class="name">Munzir Ahmed</h1>
+                <p class="subtitle">Student of Computer Science</p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/ahmedmunzir" class="social-icon" aria-label="GitHub" target="_blank"
+                        rel="noopener noreferrer">
+                        <img src="../../images/github.webp" alt="GitHub" width="28" height="28">
+                    </a>
+                    <a href="https://www.linkedin.com/in/munzirahmed/" class="social-icon" aria-label="LinkedIn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="../../images/linkedin.png" alt="LinkedIn" width="28" height="28">
+                    </a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item active">
+                        <span class="indicator"></span>
+                        <a href="../../index.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="indicator"></span>
+                        <a href="../../projects/index.html">Projects</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- RIGHT CONTENT FEED -->
+        <main class="content-feed">
+            <a href="../../index.html" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+                Back to Home
+            </a>
+
+            <article class="blog-content">
+                <h1 class="post-title" style="margin-top: 0;">Thirty Days With My Home Server</h1>
+                <div class="post-date">11.02.26</div>
+                <p class="post-excerpt" style="margin-bottom: 40px; color: var(--text-muted);">How a used Dell Optiplex
+                    3080 off Facebook Marketplace became my home server
+                    and my new toy.</p>
+
+                <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 40px;">
+
+                <p>It’s been just over 30 days since I built and installed my own home server, and I can confidently say
+                    the journey so far has been a valuable hands-on learning experience.</p>
+
+                <p>I started with purchasing a used Mini-PC off Facebook Marketplace. This decision has proven to be a
+                    cost-effective way to get into self-hosting without breaking the bank.
+
+                </p>
+
+                <img src="images/server.jpeg" alt="My Home Server Setup" width="400" height="100">
+
+                <p>Storage was my first lesson. Due to the Dell Optiplex Micros small form factor, the system only
+                    supports a single 2.5” drive. High-capacity 2.5” drives are increasingly scarce and, in many cases,
+                    not brand new, which can impact reliability. This made it clear that when I eventually migrate to a
+                    server with a larger chassis, I’ll be able to install multiple 3.5” drives and experiment with RAID
+                    technologies, trading some capacity for redundancy to protect data in the event of a drive failure.
+                </p>
+
+                <p>Next, it was time to purchase the right accessories. A Netgear switch and a Cat 6 Ethernet cable
+                    ensures the server has stable and consistent network connectivity. I then upgraded the system with a
+                    2TB SSD for my OS. I opted for Proxmox which is a hypervisor that allows for deployment and
+                    management of virtual machines and containers. </p>
+
+                <p>From there I spent time working with:
+                <ul>
+                    <li>File systems, datasets, and permissions</li>
+                    <li>Media libraries and streaming via Jellyfin</li>
+                    <li>Managing storage and access through TrueNAS</li>
+                </ul>
+                </p>
+
+                <img src="images/homarr.jpeg" alt="Homarr Dashboard" width="800" height="450">
+
+                <p>Along the way, I’ve had to think properly about bottlenecks, trade-offs, and scalability. Things
+                    rarely fit into place as you want it, and every issue turns into a learning opportunity.</p>
+
+                <p>Recently, I’ve expanded the RAM from 16GB to 32GB, which now gives me the headroom to focus more
+                    on
+                    cybersecurity projects, such as multiple lab environments and security analysis tools without
+                <p>Recently, I’ve expanded the RAM from 16GB to 32GB, which now gives me the headroom to focus more
+                    on
+                    cybersecurity projects, such as multiple lab environments and security analysis tools without
+                    running into resource constraints.</p>
+
+                <img src="images/proxmox.jpeg" alt="Proxmox Setup" width="800" height="450">
+
+                <p>My setup isn’t perfect but it’s given me a much deeper understanding of infrastructure, systems
+                    design, and how different components interact in real-world environments. I’m excited to keep
+                    iterating on this lab and pushing it further.</p>
+            </article>
+        </main>
+    </div>
+
+    <script src="../../script.js"></script>
+</body>
+
+</html>

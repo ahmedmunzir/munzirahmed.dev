@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevastopol Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="../../images/profile.png" alt="Munzir Ahmed" class="profile-img">
+                <h1 class="name">Munzir Ahmed</h1>
+                <p class="subtitle">Student of Computer Science</p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/ahmedmunzir" class="social-icon" aria-label="GitHub" target="_blank"
+                        rel="noopener noreferrer">
+                        <img src="../../images/github.webp" alt="GitHub" width="28" height="28">
+                    </a>
+                    <a href="https://www.linkedin.com/in/munzirahmed/" class="social-icon" aria-label="LinkedIn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="../../images/linkedin.png" alt="LinkedIn" width="28" height="28">
+                    </a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item">
+                        <span class="indicator"></span>
+                        <a href="../../index.html">Blog</a>
+                    </li>
+                    <li class="nav-item active">
+                        <span class="indicator"></span>
+                        <a href="../index.html">Projects</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- RIGHT CONTENT FEED -->
+        <main class="content-feed">
+            <a href="../index.html" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+                Back to Projects
+            </a>
+
+            <article class="blog-content">
+                <h1 class="post-title" style="margin-top: 0;">Sevastopol Terminal</h1>
+                <div class="post-date">14.02.26</div>
+                <p class="post-excerpt" style="margin-bottom: 40px; color: var(--text-muted);">A retro-style terminal
+                    interface built as my portfolio website. Inspired by the game Alien: Isolation.</p>
+
+                <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 40px;">
+
+                <p>Before this website, my portfolio looked a bit different. At the time I was playing through a game
+                    called Alien: Isolation on my Xbox 360. It’s set between the first two Alien movies in the franchise
+                    focusing on Ripley’s daughter coming across the notorious ‘Alien’ herself.
+                    <br><br>
+                    The game has these computer terminals placed around the spaceship where you can access ship
+                    functions such as doors and read messages to give you any clues. These terminals have a striking and
+                    unique retro-futuristic vibe. It immediately caught my eye and I got to work on recreating this
+                    design as my website.
+                </p>
+
+                <img src="images/sevastopolreal.webp" alt="Sevastopol Interface" width="700" height="450">
+
+                <p>I wanted to build a fully interactive portfolio website styled like a Sevastolink terminal:
+                    <br><br>
+                    - CRT aesthetic<br>
+                    - Scanlines overlay<br>
+                    - Green monochrome theme<br>
+                    - Folder navigation with connector lines<br>
+                    - Dynamic content panels<br>
+                    - A Pong game (because why not?)
+                    <br><br>
+                    The idea wasn’t to copy the interface exactly, but to replicate the feeling of it.
+                    <br><br>
+                    Each folder button dynamically calculates its vertical connector line length based on its layout
+                    position. When switching folders or entering fullscreen mode, it recalculates the line height to
+                    keep everything properly aligned.
+                    <br><br>
+                    To simulate the screen effect, the entire UI sits beneath a scanlines PNG overlay. A bezel image
+                    frames the display, and <codeinline>z-index</codeinline> layering is carefully controlled
+                    throughout. <codeinline>pointer-events: none</codeinline> is used so the overlays don’t block
+                    interaction. These small details make everything feel like it’s being rendered inside a physical
+                    monitor.
+                </p>
+
+                <div class="blog-image-row">
+                    <img src="images/loading.png" alt="Sevastopol Loading Screen">
+                    <img src="images/aboutme.png" alt="Sevastopol About Me">
+                </div>
+
+                <p>Next, to match the industrial sci-fi feel of the interface, I used a pixel-style font (Retro
+                    Computer).
+                    <br><br>
+                    Lastly, I embedded a fully working Pong game built with the <codeinline>canvas</codeinline> API. It
+                    includes dynamic resizing, CPU paddle AI, collision detection, and real-time rendering using
+                    <codeinline>requestAnimationFrame</codeinline>. It felt fitting to include an old-school arcade game
+                    inside a retro terminal interface.
+                </p>
+
+                <img src="images/pong.png" alt="Sevastopol Pong Game" width="700" height="450">
+                <p>Some suprisingly tricky things were keeping connector lines aligned when resizing/fullscreen and
+                    making the Pong canvas perfectly fill the terminal window. Most of the time wasn’t spent writing
+                    logic, it was actually spent adjusting 0.2vw borders and aligning elements by eye until it felt
+                    right. <br><br>
+                    This wasn’t just a UI replication project. It was an exercise in attention to detail and turning
+                    nostalgia into implementation.
+                    Rebuilding something you admire forces you to understand it deeply. And in this case, it was just as
+                    satisfying as playing through the game itself.
+                </p>
+            </article>
+        </main>
+    </div>
+
+    <script src="../../script.js"></script>
+</body>
+
+</html>

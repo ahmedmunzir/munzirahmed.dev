@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="../images/profile.png" alt="Munzir Ahmed" class="profile-img">
+                <h1 class="name">Munzir Ahmed</h1>
+                <p class="subtitle">Student of Computer Science</p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/ahmedmunzir" class="social-icon" aria-label="GitHub" target="_blank"
+                        rel="noopener noreferrer">
+                        <img src="../images/github.webp" alt="GitHub" width="28" height="28">
+                    </a>
+                    <a href="https://www.linkedin.com/in/munzirahmed/" class="social-icon" aria-label="LinkedIn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="../images/linkedin.png" alt="LinkedIn" width="28" height="28">
+                    </a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item">
+                        <span class="indicator"></span>
+                        <a href="../index.html">Blog</a>
+                    </li>
+                    <li class="nav-item active">
+                        <span class="indicator"></span>
+                        <a href="index.html">Projects</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- RIGHT CONTENT FEED -->
+        <main class="content-feed">
+            <a href="sevastopol/index.html" class="post-card">
+                <h2 class="post-title">Sevastopol Terminal</h2>
+                <div class="post-date">14.02.26</div>
+
+                <div class="post-preview-images">
+                    <img src="sevastopol/images/sevastopolreal.webp" alt="Sevastopol Interface">
+                    <img src="sevastopol/images/loading.png" alt="Loading Screen">
+                    <img src="sevastopol/images/aboutme.png" alt="About Me Command">
+                </div>
+
+                <p class="post-excerpt">A retro-style terminal interface built as my portfolio website. Inspired by
+                    the game Alien: Isolation.</p>
+            </a>
+
+            <a href="horseinventory/index.html" class="post-card">
+                <h2 class="post-title">HorseInventory 1.21</h2>
+                <div class="post-date">26.09.24</div>
+
+                <div class="post-preview-images">
+                    <img src="horseinventory/images/inventory.png" alt="Horse Inventory GUI">
+                    <img src="horseinventory/images/horse.webp" alt="Tamed Horse with Saddle">
+                </div>
+                <p class="post-excerpt">A plugin for 1.21 Minecraft written in Java. Adds a simple GUI for a horse
+                    inventory. Horse needs to be tamed and wearing a saddle for it to work.</p>
+            </a>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
