@@ -566,6 +566,35 @@ codeinline {
     /* Behave like text but respect padding/margins */
 }
 
+/* SQL Snippets Styling */
+.sql-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.sql-snippet {
+    flex: 1;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4da6ff;
+    /* A nice highlight color matching the links */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .sql-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
 /* Utility Classes */
 .text-link {
     color: #4da6ff;

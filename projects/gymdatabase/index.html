@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management Database System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="../../images/profile.png" alt="Munzir Ahmed" class="profile-img">
+                <h1 class="name">Munzir Ahmed</h1>
+                <p class="subtitle">Student of Computer Science</p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/ahmedmunzir" class="social-icon" aria-label="GitHub" target="_blank"
+                        rel="noopener noreferrer">
+                        <img src="../../images/github.webp" alt="GitHub" width="28" height="28">
+                    </a>
+                    <a href="https://www.linkedin.com/in/munzirahmed/" class="social-icon" aria-label="LinkedIn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="../../images/linkedin.png" alt="LinkedIn" width="28" height="28">
+                    </a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item">
+                        <span class="indicator"></span>
+                        <a href="../../blog/">Blog</a>
+                    </li>
+                    <li class="nav-item active">
+                        <span class="indicator"></span>
+                        <a href="../">Projects</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- RIGHT CONTENT FEED -->
+        <main class="content-feed">
+            <a href="../" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+                Back to Projects
+            </a>
+
+            <article class="blog-content">
+                <h1 class="post-title" style="margin-top: 0;">Gym Management Database System</h1>
+                <div class="post-date">20.12.24</div>
+                <p class="post-excerpt" style="margin-bottom: 40px; color: var(--text-muted);">A fully designed and
+                    implemented relational database system for managing members, subscriptions, bookings and staff
+                    operations. Built as part of a university group project, the system includes
+                    entity-relationship modelling, normalization, constraints, and SQL queries.</p>
+                <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 40px;">
+
+                <p>For one of my university group projects we built a fully working Gym Management System database using
+                    Oracle APEX. The goal was simple. Design a realistic system that could actually run a gym. Not just
+                    store names and numbers but handle memberships, bookings, personal training sessions, discounts,
+                    attendance and more.<br><br>
+                    <img src="images/GMS-USECASE.png" alt="Gym Management System Use Case Diagram" width="700"
+                        height="600">
+                    We started with the design. Before writing a single line of SQL we identified all the strong and
+                    weak entities. Members, Staff, Membership Plans, Classes, Workouts, Class Bookings,
+                    Guests.
+                </p>
+
+
+                <p>Then we built a full ERD and carefully defined the relationships between everything. Every foreign
+                    key had a purpose. Every table had a reason to exist. That part taught me how important structure is
+                    before implementation.</p>
+
+                <img src="images/Gym-ERD.png" alt="Gym Entity Relationship Diagram" width="700" height="400">
+                <p>After that we mapped the ERD into a fully normalised relational model. Everything was brought into
+                    Third Normal Form. No transitive dependencies. No attributes depending on non key columns. Just
+                    clean structure and clarity.<br><br>
+
+                    Then came the SQL. We wrote DDL scripts for over fifteen tables including Member, Staff, PT Session,
+                    Attendance, Discount Usage and more. Primary keys were defined properly. Foreign key constraints
+                    were added using alter table so referential integrity was enforced across the entire system.</p>
+
+                <div class="sql-container">
+                    <div class="sql-snippet">
+                        <pre>CREATE TABLE Staff (
+    StaffID NUMBER PRIMARY KEY,
+    First_Name VARCHAR2(100),
+    Last_Name VARCHAR2(100),
+    DOB DATE,
+    Gender VARCHAR2(10),
+    Salary NUMBER,
+    Phone_No VARCHAR2(20),
+    Email VARCHAR2(100),
+    Specialisation VARCHAR2(100)
+);</pre>
+                    </div>
+                    <div class="sql-snippet">
+                        <pre>CREATE TABLE Member (
+    MemberID NUMBER PRIMARY KEY,
+    First_Name VARCHAR2(100),
+    Last_Name VARCHAR2(100),
+    DOB DATE,
+    Gender VARCHAR2(10),
+    Address VARCHAR2(255),
+    Phone_No VARCHAR2(20),
+    Email VARCHAR2(100),
+    PlanID NUMBER
+);</pre>
+                    </div>
+                </div>
+
+                <p>Populating the database required planning as well. We inserted into independent tables first such as
+                    Equipment and Discounts. Then we populated the dependent tables once foreign key references existed.
+                    That order mattered. It prevented constraint errors and forced us to think logically about data
+                    flow.<br><br>
+
+                    The most interesting part for me was writing analytical queries. We created queries to list all
+                    classes with instructors, calculate monthly revenue across memberships and bookings, identify the
+                    top trainers by session count, and even detect members whose memberships expired but were still
+                    attending the gym. That is when the database started to feel real. It stopped being tables and
+                    started being insight.</p>
+
+                <div class="sql-container">
+                    <div class="sql-snippet">
+                        <pre>SELECT
+    SUM(m.FEE) AS Membership_Revenue,
+    SUM(pt.FEE) AS PT_Session_Revenue,
+    SUM(cb.FEE) AS Class_Booking_Revenue,
+    (SUM(m.FEE) + SUM(pt.FEE) + SUM(cb.FEE)) AS Total_Revenue
+FROM
+    MEMBERSHIP m
+LEFT JOIN PT_SESSION pt ON pt.MEMBERID = m.PLANID
+LEFT JOIN CLASSBOOKING cb ON cb.MEMBERID = m.PLANID
+WHERE
+    TO_CHAR(m.EXPIRYDATE, 'MM-YYYY') = '12-2024'
+    OR TO_CHAR(pt.SESSIONDATE, 'MM-YYYY') = '12-2024'
+    OR TO_CHAR(cb.BOOKINGDATE, 'MM-YYYY') = '12-2024';</pre>
+                    </div>
+                    <div class="sql-snippet">
+                        <pre>SELECT
+    m.FIRST_NAME || ' ' || m.LAST_NAME AS Member_Name,
+    m.EMAIL,
+    m.PHONE_NO,
+    mem.EXPIRYDATE,
+    a.ATTENDANCEDATE
+FROM
+    MEMBER m
+INNER JOIN
+    MEMBERSHIP mem ON m.PLANID = mem.PLANID
+INNER JOIN
+    ATTENDANCE a ON a.MEMBERID = m.MEMBERID
+WHERE
+    mem.EXPIRYDATE < SYSDATE
+    AND a.ATTENDANCEDATE BETWEEN SYSDATE - 30 AND SYSDATE;</pre>
+                    </div>
+                </div>
+
+                <p>We also implemented triggers to automate business logic. Membership status automatically changes to
+                    inactive once expired. Class capacity decreases when someone books a spot. Members can be notified
+                    before expiry. That was the point where it moved beyond basic CRUD and into automation.<br><br>
+
+                    Looking back, this project forced me to think like a systems designer. Not just writing code but
+                    designing rules, enforcing integrity, and thinking about how data behaves in the real world. We also
+                    discussed security considerations and how a system like this would need encryption and stronger
+                    protection if deployed in production.<br><br>
+
+                    It was a proper foundational database project. Structured. Logical. Clean.
+
+                    And honestly it made me appreciate backend systems more than ever.</p>
+            </article>
+        </main>
+    </div>
+
+    <script src="../../script.js"></script>
+</body>
+
+</html>
