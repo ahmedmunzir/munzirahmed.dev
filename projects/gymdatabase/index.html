@@ -170,16 +170,32 @@ WHERE
 
                 <p>We also implemented triggers to automate business logic. Membership status automatically changes to
                     inactive once expired. Class capacity decreases when someone books a spot. Members can be notified
-                    before expiry. That was the point where it moved beyond basic CRUD and into automation.<br><br>
+                    before expiry. That was the point where it moved beyond basic CRUD and into automation.</p>
 
-                    Looking back, this project forced me to think like a systems designer. Not just writing code but
+                <div class="sql-container">
+                    <div class="sql-snippet" style="flex: 0 1 auto; padding-right: 40px;">
+                        <pre>CREATE OR REPLACE TRIGGER Update_Membership_Status
+    AFTER UPDATE OR INSERT ON MEMBERSHIP
+    FOR EACH ROW
+BEGIN
+    IF :NEW.EXPIRYDATE < SYSDATE THEN
+        UPDATE MEMBERSHIP
+        SET STATUS = 'Inactive'
+        WHERE PLANID = :NEW.PLANID;
+    END IF;
+END;
+/</pre>
+                    </div>
+                </div>
+
+                <p>Looking back, this project forced me to think like a systems designer. Not just writing code but
                     designing rules, enforcing integrity, and thinking about how data behaves in the real world. We also
                     discussed security considerations and how a system like this would need encryption and stronger
                     protection if deployed in production.<br><br>
 
                     It was a proper foundational database project. Structured. Logical. Clean.
 
-                    And honestly it made me appreciate backend systems more than ever.</p>
+                    It made me appreciate backend systems more than ever.</p>
             </article>
         </main>
     </div>
