@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Scan & SSH Brute Force Detection Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" type="image/png" href="../../images/favicon.png">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="../../images/profile.png" alt="Munzir Ahmed" class="profile-img">
+                <h1 class="name">Munzir Ahmed</h1>
+                <p class="subtitle">Student of Computer Science</p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/ahmedmunzir" class="social-icon" aria-label="GitHub" target="_blank"
+                        rel="noopener noreferrer">
+                        <img src="../../images/github.webp" alt="GitHub" width="28" height="28">
+                    </a>
+                    <a href="https://www.linkedin.com/in/munzirahmed/" class="social-icon" aria-label="LinkedIn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="../../images/linkedin.png" alt="LinkedIn" width="28" height="28">
+                    </a>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item">
+                        <span class="indicator"></span>
+                        <a href="../../blog/">Blog</a>
+                    </li>
+                    <li class="nav-item active">
+                        <span class="indicator"></span>
+                        <a href="../">Projects</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- RIGHT CONTENT FEED -->
+        <main class="content-feed">
+            <a href="../" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"></path>
+                    <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+                Back to Projects
+            </a>
+
+            <article class="blog-content">
+                <h1 class="post-title" style="margin-top: 0;">Port Scan &amp; SSH Brute Force Detection Lab</h1>
+                <div class="post-date">23.02.26</div>
+                <p class="post-excerpt" style="margin-bottom: 40px; color: var(--text-muted);"></p>
+
+                <p>I built this lab to understand what real attack activity actually looks like from a defensive point
+                    of view. Using an isolated attacker and target setup, I captured port scans at the packet level and
+                    investigated failed SSH logins through system logs. The goal was to connect what an attacker does
+                    with how a defender detects and analyses it.</p>
+                <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 40px;">
+                <h2>Part 1: Setting up the Lab & Ubuntu</h2>
+
+                <p>
+                    <br>Before analysing any attacks, I needed a controlled environment where I could safely generate
+                    and
+                    observe traffic. I built a small isolated lab using Proxmox with two virtual machines: a Kali Linux
+                    attacker and an Ubuntu Server target.<br><br>
+
+                    I created a dedicated internal network bridge so both machines could communicate without being
+                    exposed
+                    to my home network. Kali was configured with two interfaces, one for internet access and
+                    management, and one connected to the isolated lab network. The Ubuntu server was attached only to
+                    the internal bridge and assigned a static IP address.<br><br>
+                <div class="blog-image-row">
+                    <img src="images/vmbr1.png" alt="Sevastopol Loading Screen">
+                    <img src="images/storageconfig.png" alt="Sevastopol About Me">
+                </div>
+                </p>
+                <p>
+                    SSH was installed and enabled on the target machine, and connectivity between the attacker and
+                    target was verified through ping and SSH tests. At this stage, the goal was simply to ensure the lab
+                    environment was stable, segmented, and ready for controlled attack simulation.<br><br>
+
+                    This setup formed the foundation for all packet capture and log analysis carried out in later parts
+                    of the project.
+                </p>
+                <h2>Part 2: Stealth SYN Scan Analysis</h2>
+                <p>
+                    <br>
+                    With the lab environment ready, I moved on to analysing how a stealth port scan behaves at the
+                    packet level. I used tcpdump on the Ubuntu server to capture traffic while running a SYN scan from
+                    Kali using <codeinline>nmap -sS</codeinline>.<br><br>
+                    <img src="images/nmap1.png" alt="Nmap">
+                    After transferring the capture file to Kali, I opened it in Wireshark and filtered for specific
+                    TCP
+                    flags. I observed that 1000 SYN packets were sent, only one SYN/ACK response was received for
+                    the
+                    open SSH port, and the remaining ports responded with RST packets. For the open port, the
+                    handshake
+                    stopped at SYN, SYN/ACK, RST, meaning the connection was never fully established.<br><br>
+                </p>
+
+                <div class="blog-image-row">
+                    <img src="images/wsfilter1.png" alt="Wireshark Filter 1">
+                    <img src="images/wsfilter2.png" alt="Wireshark Filter 2">
+                </div>
+                <p>
+                    This confirmed how a half open scan works in practice. Instead of completing the three way
+                    handshake, the scanner sends a reset after receiving confirmation that the port is open. Seeing
+                    this
+                    directly in the packet capture made the behaviour much clearer than simply reading about it.
+                </p>
+                <h2>Part 3: Full TCP Connect Scan Comparison</h2>
+                <p>
+                    <br>
+                    After analysing the stealth SYN scan, I repeated the process using a full TCP connect scan with
+                    <codeinline>nmap -sT</codeinline>. Traffic was captured again with tcpdump and reviewed in Wireshark
+                    to compare the behaviour with
+                    the previous scan.<br><br>
+                    <img src="images/nmapst.png" alt="Nmapst">
+
+                    This time, the open SSH port completed the full three way handshake. Instead of stopping at SYN,
+                    SYN/ACK, RST, I observed SYN, SYN/ACK, ACK followed by additional connection packets before the
+                    session closed. The number of ACK packets increased significantly compared to the stealth scan,
+                    showing that a real connection was briefly established.<br><br>
+                <div class="blog-image-row">
+                    <img src="images/wsfilter4.png" alt="Wireshark Filter 4">
+                    <img src="images/wsfilter5.png" alt="Wireshark Filter 5">
+                </div>
+                </p>
+                <p>
+                    This comparison helped highlight the difference in detectability. A full connect scan generates more
+                    normal looking traffic and is more likely to appear in host logs, while a SYN scan avoids completing
+                    the connection and leaves a smaller footprint.
+                </p>
+                <h2>Part 4: Firewall Behaviour and Filtered Ports</h2>
+                <p>
+                    <br>
+                    Next, I enabled a firewall on the Ubuntu server using UFW and configured it to deny all incoming
+                    connections except SSH. The purpose was to observe how defensive controls change the way a port scan
+                    appears at the network level.<br><br>
+                    <img src="images/nmapfirewall.png" alt="Nmap Firewall">
+
+                    After running another SYN scan and capturing the traffic, the results were noticeably different.
+                    Instead of returning RST packets for closed ports, the firewall silently dropped the traffic. Nmap
+                    reported 999 ports as filtered, and I observed a large increase in SYN retransmissions. The scan
+                    also took significantly longer to complete.<br><br>
+                <div class="blog-image-row">
+                    <img src="images/wsfilter6.png" alt="Wireshark Filter 6">
+                    <img src="images/wsfilter7.png" alt="Wireshark Filter 7">
+                </div>
+                </p>
+                <p>
+                    This demonstrated the difference between closed and filtered ports in practice. A closed port
+                    actively responds, while a filtered port provides no response at all. Seeing this change in
+                    behaviour reinforced how firewalls alter scan signatures and how that affects detection and
+                    analysis.
+                </p>
+                <h2>Part 5: SSH Brute Force Log Investigation</h2>
+                <p>
+                    <br>
+                    In the final part of the project, I shifted focus from network traffic to host level logs. I
+                    simulated repeated failed SSH login attempts from the Kali machine and then analysed the
+                    authentication logs on the Ubuntu server.<br><br>
+                    <img src="images/passwords.png" alt="Passwords">
+
+                    By reviewing <codeinline>/var/log/auth.log</codeinline>, I identified multiple failed login attempts
+                    targeting a non existent
+                    user from the same source IP address within a short time window. In total, 53 failed authentication
+                    attempts were recorded. The logs clearly showed repeated “Failed password for invalid user” entries,
+                    along with varying source ports.<br><br>
+
+                    This part of the project demonstrated how brute force behaviour appears in system logs and how to
+                    extract meaningful indicators such as source IP, attempt count, and time range. It reinforced the
+                    importance of log analysis in detecting and investigating suspicious authentication activity.
+                </p>
+                <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 40px;">
+                <p>This project allowed me to follow the full flow of an attack from generation to detection and
+                    investigation. I analysed reconnaissance at the packet level, observed how firewall rules change
+                    scan behaviour, and then investigated failed authentication attempts through system logs. By the end
+                    of it, I had a much clearer understanding of how network activity translates into real signals that
+                    a defender can monitor and respond to.</p>
+            </article>
+        </main>
+    </div>
+
+    <script src="../../script.js"></script>
+</body>
+
+</html>
