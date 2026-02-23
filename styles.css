@@ -566,7 +566,8 @@ codeinline {
     padding: 2px 6px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9em;
-    color: #e0e0e0;
+    /* color: #e0e0e0; */
+    color: #26ba27;
     display: inline-block;
     /* Behave like text but respect padding/margins */
 }
