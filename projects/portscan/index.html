@@ -101,7 +101,7 @@
                     With the lab environment ready, I moved on to analysing how a stealth port scan behaves at the
                     packet level. I used tcpdump on the Ubuntu server to capture traffic while running a SYN scan from
                     Kali using <codeinline>nmap -sS</codeinline>.<br><br>
-                    <img src="images/nmap1.png" alt="Nmap">
+                    <img src="images/nmap1.png" alt="Nmap" style="width: 100%; max-width: 700px;">
                     After transferring the capture file to Kali, I opened it in Wireshark and filtered for specific
                     TCP
                     flags. I observed that 1000 SYN packets were sent, only one SYN/ACK response was received for
@@ -128,7 +128,7 @@
                     <codeinline>nmap -sT</codeinline>. Traffic was captured again with tcpdump and reviewed in Wireshark
                     to compare the behaviour with
                     the previous scan.<br><br>
-                    <img src="images/nmapst.png" alt="Nmapst">
+                    <img src="images/nmapst.png" alt="Nmapst" style="width: 100%; max-width: 700px;">
 
                     This time, the open SSH port completed the full three way handshake. Instead of stopping at SYN,
                     SYN/ACK, RST, I observed SYN, SYN/ACK, ACK followed by additional connection packets before the
@@ -150,7 +150,7 @@
                     Next, I enabled a firewall on the Ubuntu server using UFW and configured it to deny all incoming
                     connections except SSH. The purpose was to observe how defensive controls change the way a port scan
                     appears at the network level.<br><br>
-                    <img src="images/nmapfirewall.png" alt="Nmap Firewall">
+                    <img src="images/nmapfirewall.png" alt="Nmap Firewall" style="width: 100%; max-width: 700px;">
 
                     After running another SYN scan and capturing the traffic, the results were noticeably different.
                     Instead of returning RST packets for closed ports, the firewall silently dropped the traffic. Nmap
@@ -173,7 +173,7 @@
                     In the final part of the project, I shifted focus from network traffic to host level logs. I
                     simulated repeated failed SSH login attempts from the Kali machine and then analysed the
                     authentication logs on the Ubuntu server.<br><br>
-                    <img src="images/passwords.png" alt="Passwords">
+                    <img src="images/passwords.png" alt="Passwords" style="width: 100%; max-width: 700px;">
 
                     By reviewing <codeinline>/var/log/auth.log</codeinline>, I identified multiple failed login attempts
                     targeting a non existent

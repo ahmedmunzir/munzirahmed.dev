@@ -529,17 +529,22 @@ body {
     display: flex;
     gap: 16px;
     margin-bottom: 32px;
+    max-width: 700px;
+    /* Constrain to match text width */
 }
 
 .blog-image-row img {
+    flex: 1;
+    /* Allow equal stretching within max-width */
     width: calc(50% - 8px);
-    /* Half width minus half gap */
     height: auto;
     margin-bottom: 0;
-    /* Reset margin since row handles it */
     margin-top: 0;
-    object-fit: cover;
+    object-fit: contain;
+    /* Ensure the whole image shows */
     border-radius: 8px;
+    background-color: #1a1a1a;
+    /* Optional: background for containment area */
 }
 
 @media (max-width: 600px) {
