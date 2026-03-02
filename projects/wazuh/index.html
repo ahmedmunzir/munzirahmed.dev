@@ -127,9 +127,47 @@
 
                     I also examined the JSON structure of the generated alerts to better understand the data available
                     for analysis. <br><br>
-                <div class="blog-image-row">
-                    <img src="images/json1.png" alt="JSON 1">
-                    <img src="images/json2.png" alt="JSON 2">
+                <div class="sql-container">
+                    <div class="sql-snippet">
+                        <pre>{
+    "agent": {
+        "ip": "10.10.10.20",
+        "name": "ubuntu-target",
+        "id": "001"
+    },
+    "data": {
+        "srcip": "10.10.10.10",
+        "dstuser": "targetuser",
+        "srcport": "50810"
+    },
+    "rule": {
+        "mail": false,
+        "level": 10,
+        "hipaa": [
+            "164.312.b"
+        ],</pre>
+                    </div>
+                    <div class="sql-snippet">
+                        <pre>"frequency": 8,
+        "gdpr": [
+            "IV_35.7.d",
+            "IV_32.2"
+        ],
+        "firedtimes": 1,
+        "mitre": {
+            "technique": [
+                "Brute Force"
+            ],
+            "id": [
+                "T1110"
+            ],
+            "tactic": [
+                "Credential Access"
+            ]
+        },
+        "id": "5763"
+    },</pre>
+                    </div>
                 </div>
                 </p>
                 <p>
